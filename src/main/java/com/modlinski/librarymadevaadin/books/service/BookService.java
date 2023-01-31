@@ -4,10 +4,11 @@ import com.modlinski.librarymadevaadin.books.domain.Book;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BookService {
 
-    private Set books;
+    private Set<Book> books;
     private static BookService bookService;
 
     private BookService() {
@@ -39,5 +40,9 @@ public class BookService {
         books.add(new Book("The Handmaid's Tale", "Margaret Atwood", "2019", "Classic"));
         books.add(new Book("Watch Us Rise", "Renée Watson,  Ellen Hagan", "2019", "Poetry"));
         return books;
+    }
+
+    public Set findByTitle(String title) {
+        return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toSet());
     }
 }

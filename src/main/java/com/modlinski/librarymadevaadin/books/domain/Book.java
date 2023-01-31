@@ -1,5 +1,8 @@
 package com.modlinski.librarymadevaadin.books.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
 public class Book {
