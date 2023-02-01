@@ -2,7 +2,6 @@ package com.modlinski.librarymadevaadin.books.service;
 
 import com.modlinski.librarymadevaadin.books.domain.Book;
 import com.modlinski.librarymadevaadin.books.domain.BookType;
-import com.vaadin.flow.component.button.Button;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -48,25 +47,11 @@ public class BookService {
         return books.stream().filter(book -> book.getTitle().contains(title)).collect(Collectors.toSet());
     }
 
-    private Button save = new Button("Save");
-    private Button delete = new Button("Delete");
-
     public void save(Book book) {
         this.books.add(book);
     }
 
     public void delete(Book book) {
         this.books.remove(book);
-    }
-
-    public void setBook(Book book) {
-        binder.setBean(book);
-
-        if (book == null) {
-            setVisible(false);
-        } else {
-            setVisible(true);
-            title.focus();
-        }
     }
 }

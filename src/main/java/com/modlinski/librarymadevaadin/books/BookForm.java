@@ -3,6 +3,7 @@ package com.modlinski.librarymadevaadin.books;
 import com.modlinski.librarymadevaadin.books.domain.Book;
 import com.modlinski.librarymadevaadin.books.domain.BookType;
 import com.modlinski.librarymadevaadin.books.service.BookService;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -16,9 +17,14 @@ public class BookForm extends FormLayout {
     private TextField author = new TextField("Author");
     private TextField publicationYear = new TextField("Publication year");
     private ComboBox<BookType> type = new ComboBox<>("Book type");
+
+    private Button save = new Button("Save");
+    private Button delete = new Button("Delete");
+
     private Binder<Book> binder = new Binder<Book>(Book.class);
     private MainView mainView;
     private BookService service = BookService.getInstance();
+
 
     public BookForm(MainView mainView) {
         type.setItems(BookType.values());
@@ -43,5 +49,16 @@ public class BookForm extends FormLayout {
         service.delete(book);
         mainView.refresh();
         setBook(null);
+    }
+
+    public void setBook(Book book) {
+        binder.setBean(book);
+
+        if (book == null) {
+            setVisible(false);
+        } else {
+            setVisible(true);
+            title.focus();
+        }
     }
 }
